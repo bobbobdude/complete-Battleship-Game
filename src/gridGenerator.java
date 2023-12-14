@@ -47,8 +47,8 @@ public class gridGenerator {
 
     }
 
-    private int userRequestedRows;
-    private int userRequestedColumns;
+    public static int userRequestedRows;
+    public static int userRequestedColumns;
     private int [][] userCreatedGrid;
 
     private int gridMinSize;
@@ -86,14 +86,14 @@ public class gridGenerator {
     Put the validity checks in a constructor instead of calling getters and setters
 
      */
-    public void inputUserRequestedRowsAndColumns() {
+    public void inputUserRequestedRowsAndColumns() throws InterruptedException {
         boolean numsEntered = false;
         int rows;
         int columns;
         while (numsEntered == false) {
             try {
                 Scanner userIntInput = new Scanner(System.in);
-                System.out.print("Please enter the amount of rows you want for the next game and press enter (must be at least " + gridMinSize + "): ");
+                generalMethods.printStringSlowlyToScreen("Please enter the amount of rows you want for the next game and press enter (must be at least " + gridMinSize + "): ");
                 System.out.println();
                 rows = userIntInput.nextInt();
                 while (rows < gridMinSize){
@@ -101,11 +101,11 @@ public class gridGenerator {
                     rows = userIntInput.nextInt();
                 }
                 setUserRequestedRows(rows);
-                System.out.print("Please enter the amount of columns you want for the next game and press enter (must be at least " + gridMinSize + "): ");
+                generalMethods.printStringSlowlyToScreen("Please enter the amount of columns you want for the next game and press enter (must be at least " + gridMinSize + "): ");
                 System.out.println();
                 columns = userIntInput.nextInt();
-                while (columns < 5){
-                    System.out.println("Must be at least " + gridMinSize + ",try again");
+                while (columns < gridMinSize){
+                    generalMethods.printStringSlowlyToScreen("Must be at least " + gridMinSize + ",try again");
                     columns = userIntInput.nextInt();
                 }
                 setUserRequestedColumns(columns);
@@ -113,7 +113,7 @@ public class gridGenerator {
                 numsEntered = true;
             } catch (Exception InputMismatchException) {
                 System.out.println();
-                System.out.println("ERROR Something other than a number was entered. Try again.");
+                generalMethods.printStringSlowlyToScreen("ERROR Something other than a number was entered. Try again.");
                 System.out.println();
             }
         }
